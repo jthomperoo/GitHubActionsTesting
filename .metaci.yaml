@@ -1,0 +1,18 @@
+configuration:
+  provider: github
+  output: .github/workflows/ci.yml
+
+plugins:
+  - name: git
+
+tasks:
+  - name: main
+    on:
+      - pull_request
+      - push
+    image: python:3.6
+    procedure:
+      - name: "checkout code"
+        use: git/checkout
+      - name: "lint codebase"
+        run: cat README.md
